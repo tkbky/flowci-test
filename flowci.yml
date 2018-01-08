@@ -1,0 +1,16 @@
+flow:
+  - envs:
+      RAILS_ENV: test
+    steps:
+      - name: Clone Repository
+        script: |
+          rm -rf flowci-test
+          git clone git@github.com:tkbky/flowci-test.git
+      - name: Setup
+        script: |
+          cd flowci-test
+          docker-compose build
+      - name: Test
+        script: |
+          cd flowci-test
+          docker-compose run web bundle exec rspec --format progress
